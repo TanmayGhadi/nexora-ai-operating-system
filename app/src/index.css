@@ -1,0 +1,190 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@property --border-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 0%;
+    --foreground: 240 10% 96%;
+    --card: 240 10% 5%;
+    --card-foreground: 240 10% 96%;
+    --popover: 240 10% 5%;
+    --popover-foreground: 240 10% 96%;
+    --primary: 224 100% 61%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 240 4% 8%;
+    --secondary-foreground: 240 10% 96%;
+    --muted: 240 4% 8%;
+    --muted-foreground: 240 4% 45%;
+    --accent: 264 100% 62%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 100% / 0.08;
+    --input: 0 0% 100% / 0.08;
+    --ring: 224 100% 61%;
+    --radius: 0.75rem;
+  }
+
+  body {
+    @apply bg-nexora-bg text-nexora-text-primary antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+
+  ::selection {
+    background: rgba(59, 106, 255, 0.3);
+    color: #F0F0F5;
+  }
+}
+
+@layer components {
+  .gradient-border-card {
+    position: relative;
+    background: rgba(15, 15, 25, 0.6);
+    border-radius: 20px;
+  }
+
+  .gradient-border-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 20px;
+    padding: 2px;
+    background: conic-gradient(from var(--border-angle), #3B6AFF, #7C3BFF, #3B6AFF);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: gradient-border 4s linear infinite;
+  }
+
+  .glass-card {
+    background: rgba(15, 15, 25, 0.6);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .glass-card:hover {
+    border-color: rgba(59, 106, 255, 0.2);
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+
+  .text-gradient-hero {
+    background: linear-gradient(135deg, #F0F0F5 0%, #3B6AFF 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .btn-primary {
+    background: linear-gradient(135deg, #3B6AFF 0%, #7C3BFF 100%);
+    color: #FFFFFF;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 0 20px rgba(59, 106, 255, 0.2);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -50%;
+    width: 200%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.15),
+      transparent
+    );
+    transition: left 0.5s ease;
+  }
+
+  .btn-primary:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 40px rgba(59, 106, 255, 0.4);
+  }
+
+  .btn-primary:hover::before {
+    left: 100%;
+  }
+
+  .btn-secondary {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #F0F0F5;
+    padding: 14px 28px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(59, 106, 255, 0.4);
+  }
+
+  .section-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 48px;
+  }
+
+  @media (max-width: 1023px) {
+    .section-container {
+      padding: 0 32px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-container {
+      padding: 0 24px;
+    }
+  }
+}
+
+@layer utilities {
+  .hero-radial-glow {
+    background: radial-gradient(ellipse at 60% 40%, rgba(59, 106, 255, 0.08) 0%, rgba(124, 59, 255, 0.05) 40%, transparent 70%);
+  }
+
+  .mesh-purple-glow {
+    background: radial-gradient(ellipse at 20% 50%, rgba(124, 59, 255, 0.15) 0%, transparent 55%);
+  }
+
+  .ambient-blue-glow {
+    background: radial-gradient(ellipse at 30% 50%, rgba(59, 106, 255, 0.05) 0%, transparent 60%);
+  }
+
+  .ambient-purple-center {
+    background: radial-gradient(ellipse at 50% 40%, rgba(124, 59, 255, 0.06) 0%, transparent 60%);
+  }
+}
